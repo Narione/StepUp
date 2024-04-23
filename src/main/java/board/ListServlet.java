@@ -44,7 +44,7 @@ public class ListServlet extends HttpServlet {
 		// 페이징된 게시글 목록을 가져오기 위해
 		vo.setFirstRecordIndex(paginationInfo.getFirstRecordIndex());
 		vo.setLastRecordIndex(paginationInfo.getLastRecordIndex());
-		List<BoardVO> list = service.getBoardList(new SearchVO(searchType, searchWord));
+		List<BoardVO> list = service.getBoardList(vo);
 		request.setAttribute("boards", list);
 		request.setAttribute("pagination", paginationInfo);
 		request.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(request, response);

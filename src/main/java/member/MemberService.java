@@ -9,6 +9,10 @@ public class MemberService {
 	public MemberService(SqlSession session) {
 		this.mapper = session.getMapper(MemberMapper.class);
 	}
+	public int getMemberTotalCount(List<MemberVO> list) {
+		return mapper.getMemberTotalCount(list);
+	}
+	
 	public List<MemberVO> getMemberList() {
 		return mapper.getMemberList();
 	}

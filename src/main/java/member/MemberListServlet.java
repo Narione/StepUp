@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
+import board.BoardVO;
+import common.PaginationInfo;
+import common.SearchVO;
+
 /**
  * Servlet implementation class MemberListServlet
  */
@@ -36,7 +40,24 @@ public class MemberListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<MemberVO> list = service.getMemberList();
-		// request에 회원목록 데이터를 보관한다.
+		
+		
+		// 페이징 관련 코드
+		String pageNo = request.getParameter("currentPageNo");
+		int currentPageNo = pageNo == null ? 1 : Integer.parseInt(pageNo);
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(currentPageNo);
+		paginationInfo.setRecordCountPerPage(10);
+		paginationInfo.setPageSize(5);
+		int totalCount = service.getMemberTotalCount(list);
+		paginationInfo.setTotalRecordCount(totalCount);
+		// 페이징된 게시글 목록을 가져오기 위해
+		vo.setFirstRecordIndex(paginationInfo.getFirstRecordIndex());
+		vo.setLastRecordIndex(paginationInfo.getLastRecordIndex());
+
+		request.setAttribute("pagination", paginationInfo);
+		
 		request.setAttribute("members", list);
 		request.getRequestDispatcher("/WEB-INF/views/member/list.jsp").forward(request, response);
 	}
