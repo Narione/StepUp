@@ -39,7 +39,6 @@ public class MemberListServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<MemberVO> list = service.getMemberList();
 		
 		
 		// 페이징 관련 코드
@@ -48,13 +47,15 @@ public class MemberListServlet extends HttpServlet {
 		
 		PaginationInfo paginationInfo = new PaginationInfo();
 		paginationInfo.setCurrentPageNo(currentPageNo);
-		paginationInfo.setRecordCountPerPage(10);
+		paginationInfo.setRecordCountPerPage(3);
 		paginationInfo.setPageSize(5);
-		int totalCount = service.getMemberTotalCount(list);
+		SearchVO vo = new SearchVO(null, null);
+		int totalCount = service.getMemberTotalCount(vo);
 		paginationInfo.setTotalRecordCount(totalCount);
 		// 페이징된 게시글 목록을 가져오기 위해
 		vo.setFirstRecordIndex(paginationInfo.getFirstRecordIndex());
 		vo.setLastRecordIndex(paginationInfo.getLastRecordIndex());
+		List<MemberVO> list = service.getMemberList(vo);
 
 		request.setAttribute("pagination", paginationInfo);
 		

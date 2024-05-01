@@ -2,9 +2,11 @@ package member;
 
 import java.util.List;
 
+import common.SearchVO;
+
 public interface MemberMapper {
-	int getMemberTotalCount(List<MemberVO> list);
-	List<MemberVO> getMemberList();
+	int getMemberTotalCount(SearchVO vo);
+	List<MemberVO> getMemberList(SearchVO vo);
 	MemberVO getMember(String id);
 	int insertMember(MemberVO vo);
 	int updateMember(MemberVO vo);
