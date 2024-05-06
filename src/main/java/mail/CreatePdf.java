@@ -40,7 +40,6 @@ public class CreatePdf extends HttpServlet {
             Font font = new Font(bf, 12);
 	
 	        document.add(new Paragraph(content, font));
-	        System.out.println(content);
 	
 	        document.close();
 	        writer.close();
