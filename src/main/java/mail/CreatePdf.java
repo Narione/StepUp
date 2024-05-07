@@ -30,13 +30,13 @@ public class CreatePdf extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		Document document = new Document();
-	    String filePath = "C:/Users/ynhp3/Documents/"+title+".pdf"; // 저장하고 싶은 경로와 파일명 설정
+	    String filePath = "Z:/2023_산대특_4차/User/std124/과제/"+title+".pdf"; // 저장하고 싶은 경로와 파일명 설정
 	
 	    try {
 	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
 	        document.open();
 	        
-	        BaseFont bf = BaseFont.createFont("C:/Users/ynhp3/Documents/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+	        BaseFont bf = BaseFont.createFont("C:/Users/user/Documents/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font font = new Font(bf, 12);
 	
 	        document.add(new Paragraph(content, font));
